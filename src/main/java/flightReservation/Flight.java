@@ -8,6 +8,30 @@ public class Flight {
     private double price;
     private int availableSeats;
 
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
     public Flight(String origin, String destination, String date, String time, double price, int availableSeats) {
         this.origin = origin;
         this.destination = destination;

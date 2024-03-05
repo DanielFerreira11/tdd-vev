@@ -8,8 +8,11 @@ import java.util.Optional;
 
 public class FlightManager {
     private final List<Flight> availableFlights;
+    private final ReservationManager reservationManager;
+
 
     public FlightManager() {
+        this.reservationManager = new ReservationManager();
         availableFlights = new ArrayList<>();
         availableFlights.add(new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5));
         availableFlights.add(new Flight("CityA", "CityC", "2024-03-10", "12:00", 120.00, 8));
@@ -35,5 +38,18 @@ public class FlightManager {
         return result;
     }
 
-    // Métodos para reservar voos, cancelar reservas e gerar confirmação de reserva podem ser adicionados aqui
+    public boolean reserveFlight(Flight flight, int numPassengers) {
+        return reservationManager.reserveFlight(flight, numPassengers);
+    }
+
+    public String generateConfirmation(Flight flight, String passengerName, int numPassengers, String contactInfo) {
+        // Lógica para gerar a confirmação de reserva (pode ser uma simples concatenação de strings)
+        String confirmation = "Reserva confirmada para " + numPassengers + " passageiro(s) em " +
+                flight.getOrigin() + " com destino a " + flight.getDestination() + ".\n" +
+                "Nome do passageiro: " + passengerName + "\n" +
+                "Informações de contato: " + contactInfo;
+
+        return confirmation;
+    }
+
 }
