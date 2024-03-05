@@ -33,4 +33,47 @@ public class FlightManagerTest {
         assertNotNull(result);
         assertFalse(result.isEmpty());
     }
+
+    @Test
+    public void reserveFlight_ReturnsTrue_WhenSeatsAvailable() {
+        FlightManager flightManager = new FlightManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+        int numPassengers = 2;
+
+        boolean result = flightManager.reserveFlight(flight, numPassengers);
+
+        assertTrue(result);
+        assertEquals(3, flight.getAvailableSeats()); // Verifica se os assentos foram atualizados corretamente
+    }
+
+    @Test
+    public void reserveFlight_ReturnsFalse_WhenNotEnoughSeats() {
+        FlightManager flightManager = new FlightManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 2);
+        int numPassengers = 4;
+
+        boolean result = flightManager.reserveFlight(flight, numPassengers);
+
+        assertFalse(result);
+        assertEquals(2, flight.getAvailableSeats()); // Verifica se os assentos não foram alterados
+    }
+
+    @Test
+    public void generateConfirmation_ReturnsCorrectConfirmation() {
+        FlightManager flightManager = new FlightManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+        String passengerName = "John Doe";
+        int numPassengers = 2;
+        String contactInfo = "john@example.com";
+
+
+        flightManager.reserveFlight(flight, numPassengers);
+        String confirmation = flightManager.generateConfirmation(flight, passengerName, numPassengers, contactInfo);
+
+        assertNotNull(confirmation);
+        assertTrue(confirmation.contains("Reserva confirmada"));
+        assertTrue(confirmation.contains("Nome do passageiro: " + passengerName));
+        assertTrue(confirmation.contains("Informações de contato: " + contactInfo));
+    }
+
 }
