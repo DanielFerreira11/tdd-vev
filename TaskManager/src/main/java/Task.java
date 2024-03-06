@@ -28,4 +28,20 @@ public class Task {
 	public Integer getPriority() {
 		return this.priority;
 	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+	
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
 }
