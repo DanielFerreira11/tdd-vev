@@ -54,4 +54,10 @@ class TaskTest {
 		task.setPriority(2);
 		assertEquals(2, task.getPriority());
 	}
+	
+	@Test
+	void testRemoveTask() {
+		manager.removeTask(0);
+		assertEquals(0, manager.getTasks().size());
+	}
 }

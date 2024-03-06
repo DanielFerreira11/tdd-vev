@@ -14,4 +14,8 @@ public class TaskManager {
 	public void addTask(Task task) {
 		this.tasks.add(task);
 	}
+	
+	public void removeTask(int index) {
+		this.tasks.remove(index);
+	}
 }

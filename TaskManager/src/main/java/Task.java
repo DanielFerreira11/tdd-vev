@@ -6,7 +6,7 @@ public class Task {
 	Date expirationDate;
 	Integer priority;
 	
-	public Task (String title, String description, Date expirationDate, Integer priority	) {
+	public Task (String title, String description, Date expirationDate, Integer priority) {
 		this.title = title;
 		this.description = description;
 		this.expirationDate = expirationDate;
