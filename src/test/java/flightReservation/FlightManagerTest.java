@@ -21,7 +21,6 @@ public class FlightManagerTest {
         assertFalse(result.isEmpty());
     }
 
-    // Exemplo para um caso em que a origem e a data são opcionais
     @Test
     public void searchFlights_ReturnsListOfFlights_ptional() {
         FlightManager flightManager = new FlightManager();
@@ -43,7 +42,7 @@ public class FlightManagerTest {
         boolean result = flightManager.reserveFlight(flight, numPassengers);
 
         assertTrue(result);
-        assertEquals(3, flight.getAvailableSeats()); // Verifica se os assentos foram atualizados corretamente
+        assertEquals(3, flight.getAvailableSeats());
     }
 
     @Test
@@ -55,7 +54,7 @@ public class FlightManagerTest {
         boolean result = flightManager.reserveFlight(flight, numPassengers);
 
         assertFalse(result);
-        assertEquals(2, flight.getAvailableSeats()); // Verifica se os assentos não foram alterados
+        assertEquals(2, flight.getAvailableSeats());
     }
 
     @Test
@@ -74,6 +73,31 @@ public class FlightManagerTest {
         assertTrue(confirmation.contains("Reserva confirmada"));
         assertTrue(confirmation.contains("Nome do passageiro: " + passengerName));
         assertTrue(confirmation.contains("Informações de contato: " + contactInfo));
+    }
+
+    @Test
+    public void cancelReservation_ReturnsTrue_WhenReservationExists() {
+        FlightManager flightManager = new FlightManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+        int numPassengers = 2;
+        flightManager.reserveFlight(flight, numPassengers);
+
+
+        boolean result = flightManager.cancelReservation(flight, numPassengers);
+
+        assertTrue(result);
+        assertEquals(5, flight.getAvailableSeats()); // Verifica se os assentos foram restaurados corretamente
+    }
+
+    @Test
+    public void cancelReservation_ReturnsFalse_WhenNoReservationExists() {
+        FlightManager flightManager = new FlightManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+
+        boolean result = flightManager.cancelReservation(flight, 2);
+
+        assertFalse(result);
+        assertEquals(5, flight.getAvailableSeats());
     }
 
 }

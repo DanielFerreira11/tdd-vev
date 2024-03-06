@@ -30,4 +30,28 @@ public class ReservationManagerTest {
         assertEquals(2, flight.getAvailableSeats()); // Verifica se os assentos não foram alterados
     }
 
+    @Test
+    public void cancelReservation_ReturnsTrue_WhenReservationExists() {
+        ReservationManager reservationManager = new ReservationManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+        int numPassengers = 2;
+        reservationManager.reserveFlight(flight, numPassengers);
+
+        boolean result = reservationManager.cancelReservation(flight, numPassengers);
+
+        assertTrue(result);
+        assertEquals(5, flight.getAvailableSeats());
+    }
+
+    @Test
+    public void cancelReservation_ReturnsFalse_WhenNoReservationExists() {
+        ReservationManager reservationManager = new ReservationManager();
+        Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+
+        boolean result = reservationManager.cancelReservation(flight, 2);
+
+        assertFalse(result);
+        assertEquals(5, flight.getAvailableSeats()); // Verifica se os assentos não foram alterados
+    }
+
 }
