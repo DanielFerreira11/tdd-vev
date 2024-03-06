@@ -6,7 +6,7 @@ import java.util.*;
 class CreateTask {
 
 	@Test
-	void test() {
+	void createATask() {
 		String title = "Limpar a casa";
 		String description = "Limpeza semanal da sala e cozinha";
 		Date expirationDate = new Date(124, 2, 10);
