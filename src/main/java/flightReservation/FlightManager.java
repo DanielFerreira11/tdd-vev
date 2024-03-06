@@ -10,7 +10,6 @@ public class FlightManager {
     private final List<Flight> availableFlights;
     private final ReservationManager reservationManager;
 
-
     public FlightManager() {
         this.reservationManager = new ReservationManager();
         availableFlights = new ArrayList<>();
@@ -51,7 +50,9 @@ public class FlightManager {
 
         return confirmation;
     }
-
+    public boolean cancelReservation(String reservationCode, int numPassengers) {
+        return reservationManager.cancelReservation(reservationCode, numPassengers);
+    }
 
 
 }

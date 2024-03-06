@@ -37,7 +37,8 @@ public class ReservationManagerTest {
         int numPassengers = 2;
         reservationManager.reserveFlight(flight, numPassengers);
 
-        boolean result = reservationManager.cancelReservation(flight, numPassengers);
+        String reservationCode = "RES0";
+        boolean result = reservationManager.cancelReservation(reservationCode, numPassengers);
 
         assertTrue(result);
         assertEquals(5, flight.getAvailableSeats());
@@ -47,11 +48,12 @@ public class ReservationManagerTest {
     public void cancelReservation_ReturnsFalse_WhenNoReservationExists() {
         ReservationManager reservationManager = new ReservationManager();
         Flight flight = new Flight("CityA", "CityB", "2024-03-10", "10:00", 150.00, 5);
+        int numPassengers = 2;
 
-        boolean result = reservationManager.cancelReservation(flight, 2);
+        String nonExistingReservationCode = "RES123";
+        boolean result = reservationManager.cancelReservation(nonExistingReservationCode, numPassengers);
 
         assertFalse(result);
-        assertEquals(5, flight.getAvailableSeats()); // Verifica se os assentos não foram alterados
+        assertEquals(5, flight.getAvailableSeats());
     }
-
 }

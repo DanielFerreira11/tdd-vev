@@ -1,13 +1,43 @@
 package flightReservation;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReservationManager {
+    private final Map<String, Flight> reservations;
+
+    public ReservationManager() {
+        this.reservations = new HashMap<>();
+    }
+
     public boolean reserveFlight(Flight flight, int numPassengers) {
         if (flight.getAvailableSeats() >= numPassengers) {
-            // Realiza a reserva (pode envolver atualização de banco de dados, se aplicável)
+            String reservationCode = generateReservationCode();
+
             flight.setAvailableSeats(flight.getAvailableSeats() - numPassengers);
-            return true; // Reserva bem-sucedida
+            reservations.put(reservationCode, flight);
+
+            return true;
         } else {
-            return false; // Não há assentos suficientes
+            return false;
         }
+    }
+
+    public boolean cancelReservation(String reservationCode,int numPassengers ) {
+        if (reservations.containsKey(reservationCode)) {
+            Flight flight = reservations.get(reservationCode);
+
+            flight.setAvailableSeats(flight.getAvailableSeats() + numPassengers);
+
+            reservations.remove(reservationCode);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Método simples para gerar um código de reserva
+    private String generateReservationCode() {
+        return "RES" + reservations.size();
     }
 }
