@@ -22,7 +22,7 @@ public class FlightManagerTest {
     }
 
     @Test
-    public void searchFlights_ReturnsListOfFlights_ptional() {
+    public void searchFlights_ReturnsListOfFlights_Optional() {
         FlightManager flightManager = new FlightManager();
         String destination = "CityB";
         int numPassengers = 2;
