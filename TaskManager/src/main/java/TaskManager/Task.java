@@ -1,12 +1,13 @@
+package TaskManager;
 import java.util.Date;
 
 public class Task {
-	String title;
-	String description;
-	Date expirationDate;
-	Integer priority;
+	private String title;
+	private String description;
+	private Date expirationDate;
+	private Priority priority;
 	
-	public Task (String title, String description, Date expirationDate, Integer priority) {
+	public Task (String title, String description, Date expirationDate, Priority priority) {
 		this.title = title;
 		this.description = description;
 		this.expirationDate = expirationDate;
@@ -25,7 +26,7 @@ public class Task {
 		return this.expirationDate;
 	}
 	
-	public Integer getPriority() {
+	public Priority getPriority() {
 		return this.priority;
 	}
 	
@@ -41,7 +42,7 @@ public class Task {
 		this.expirationDate = expirationDate;
 	}
 	
-	public void setPriority(Integer priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 }

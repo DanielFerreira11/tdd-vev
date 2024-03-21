@@ -1,6 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
+
+import TaskManager.Priority;
+import TaskManager.*;
+
 import java.util.*;
 
 class TaskTest {
@@ -13,7 +17,7 @@ class TaskTest {
 		String title = "Limpar a casa";
 		String description = "Limpeza semanal da sala e cozinha";
 		Date expirationDate = new Date(124, 2, 10);
-		Integer priority = 3;
+		Priority priority = Priority.LOW;
 		task = new Task(title, description, expirationDate, priority);
 		manager.addTask(task);
     }
@@ -26,7 +30,7 @@ class TaskTest {
 		assertEquals("Limpar a casa", task.getTitle());
 		assertEquals("Limpeza semanal da sala e cozinha", task.getDescription());
 		assertEquals(new Date(124, 2, 10), task.getExpirationDate());
-		assertEquals(Integer.valueOf(3), task.getPriority());
+		assertEquals(Priority.LOW, task.getPriority());
 	}
 	
 	@Test
@@ -51,8 +55,8 @@ class TaskTest {
 	
 	@Test
 	void testUpdatePriorityTask() {
-		task.setPriority(2);
-		assertEquals(2, task.getPriority());
+		task.setPriority(Priority.HIGH);
+		assertEquals(Priority.HIGH, task.getPriority());
 	}
 	
 	@Test
