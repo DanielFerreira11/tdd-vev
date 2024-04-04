@@ -1,27 +1,21 @@
-package junit5Tests;
+package functionalTests;
 
 import static org.junit.jupiter.api.Assertions.*;
-import flightReservation.*;
+import FlightManager.*;
 
 import java.time.LocalDate;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class PPETest {
-
-    FlightManager manager;
-
-    @BeforeEach
-    void setUp() {
-        manager = new FlightManager();
-    }
+@DisplayName("Testes do Gerenciador de Voos")
+class FlightManagerTests {
+    FlightManager manager = new FlightManager();
 
     @Test
-    @DisplayName("Testa Criação de Voo")
+    @DisplayName("Testar Criar Voo")
     void testCreateFlight() {
-        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", "2024-04-01", 200, 2);
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
         assertFalse(manager.getFlights().contains(flight));
 
         manager.addFlight(flight);
@@ -31,9 +25,9 @@ class PPETest {
     }
 
     @Test
-    @DisplayName("Testa Voo com Número Inválido de Passageiros")
+    @DisplayName("Testar Voo com Número de Passageiros Inválido")
     void testFlightWithInvalidPassengerNumber() {
-        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", "2024-04-01", 200, 0);
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 0);
         assertFalse(manager.getFlights().contains(flight));
 
         manager.addFlight(flight);
@@ -42,9 +36,9 @@ class PPETest {
     }
 
     @Test
-    @DisplayName("Testa Voo com Data Inválida")
+    @DisplayName("Testar Voo com Data Inválida")
     void testFlightWithInvalidDate() {
-        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", "2024-04-01", 200, 2);
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2023, 3, 1), 2);
         assertFalse(manager.getFlights().contains(flight));
 
         manager.addFlight(flight);
@@ -53,9 +47,9 @@ class PPETest {
     }
 
     @Test
-    @DisplayName("Testa Remoção de Voo")
+    @DisplayName("Testar Remover Voo")
     void testRemoveFlight() {
-        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", "2024-04-01", 200, 2);
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
         assertFalse(manager.getFlights().contains(flight));
 
         manager.addFlight(flight);
@@ -65,15 +59,14 @@ class PPETest {
     }
 
     @Test
-    @DisplayName("Testa Atualização de Voo")
+    @DisplayName("Testar Atualizar Voo")
     void testUpdateFlight() {
-        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", "2024-04-01", 200, 2);
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
         assertFalse(manager.getFlights().contains(flight));
 
         manager.addFlight(flight);
-        flight.setDestination("New York");
+        flight.setDestination("Nova Iorque");
         manager.updateFlight(0, flight);
 
         assertEquals(flight, manager.getFlights().get(0));
     }
-}

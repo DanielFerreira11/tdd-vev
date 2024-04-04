@@ -1,6 +1,7 @@
-package flightReservation;
+package junit5Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+import FlightManager.*;
 
 import java.time.LocalDate;
 
@@ -8,9 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import flightReservation.FlightManager.*;
-
-class PPETest {
+class FlightManagerTests {
 
     FlightManager manager;
 
