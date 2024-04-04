@@ -9,6 +9,7 @@ public class TaskManager {
 	}
 	
 	public List<Task> getTasks() {
+		sortByDueDateAndPriority();
 		return this.tasks;
 	}
 	
@@ -33,7 +34,7 @@ public class TaskManager {
     }
 	
 	public void sortByDueDateAndPriority() {
-        Collections.sort(tasks, Comparator.comparing(Task::getExpirationDate)
+        Collections.sort(this.tasks, Comparator.comparing(Task::getExpirationDate)
                                            .thenComparing(Task::getPriority));
     }
 }
