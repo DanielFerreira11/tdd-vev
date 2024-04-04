@@ -1,10 +1,7 @@
 package flightReservation;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 public class FlightManager {
     private final List<Flight> availableFlights;
@@ -53,6 +50,29 @@ public class FlightManager {
     public boolean cancelReservation(String reservationCode, int numPassengers) {
         return reservationManager.cancelReservation(reservationCode, numPassengers);
     }
+    
+    public void addFlight(Flight flight) {
+    	this.availableFlights.add(flight);
+    }
+    
+    public void removeFlight(int index) {
+    	if (index >= 0 && index < this.availableFlights.size()) {
+            this.availableFlights.remove(index);
+        } else {
+            System.out.println("Índice inválido. O vôo não foi removido.");
+        }
+    }
+    
+    public void updateFlight(int index, Flight flight) {
+    	if (index >= 0 && index < this.availableFlights.size()) {
+            this.availableFlights.set(index, flight);
+        } else {
+            System.out.println("Índice inválido. O vôo não foi atualizado.");
+        }
+    }
 
+    public List<Flight> getFlights() {
+    	return this.availableFlights;
+    }
 
 }
