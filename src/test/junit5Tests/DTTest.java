@@ -1,34 +1,72 @@
+package functionalTests;
+
 import static org.junit.jupiter.api.Assertions.*;
+import FlightManager.*;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ReservaTest {
+@DisplayName("Testes do Gerenciador de Voos")
+class FlightManagerTests {
+    FlightManager manager = new FlightManager();
 
     @Test
-    @DisplayName("Testa Reserva Válida com Destino e Origem Diferentes e Data Válida")
-    public void testReservaValida_DestinoOrigemDiferentesDataValida() {
-        Reserva reserva = new Reserva("São Paulo", "Rio de Janeiro", "2024-04-01", 2);
-        assertTrue(reserva.ehReservaValida());
+    @DisplayName("Testar Criar Voo")
+    void testCreateFlight() {
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
+        assertFalse(manager.getFlights().contains(flight));
+
+        manager.addFlight(flight);
+
+        assertEquals(1, manager.getFlights().size());
+        assertEquals(flight, manager.getFlights().get(0));
     }
 
     @Test
-    @DisplayName("Testa Reserva Inválida com Destino e Origem Vazios e Data Válida e Número de Passageiros Inválido")
-    public void testReservaInvalida_DestinoOrigemVaziosDataValidaNumPassageirosInvalido() {
-        Reserva reserva = new Reserva("", "", "2023-03-01", 0);
-        assertFalse(reserva.ehReservaValida());
+    @DisplayName("Testar Voo com Número de Passageiros Inválido")
+    void testFlightWithInvalidPassengerNumber() {
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 0);
+        assertFalse(manager.getFlights().contains(flight));
+
+        manager.addFlight(flight);
+
+        assertEquals(0, manager.getFlights().size());
     }
 
     @Test
-    @DisplayName("Testa Cadastro Válido com Nome, Número de Contato e Email do Passageiro Válidos")
-    public void testCadastroValido_NomeNumContatoPassageiroValido() {
-        Passageiro passageiro = new Passageiro("João Silva", "1", "joão@email.com");
-        assertTrue(passageiro.ehCadastroValido());
+    @DisplayName("Testar Voo com Data Inválida")
+    void testFlightWithInvalidDate() {
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2023, 3, 1), 2);
+        assertFalse(manager.getFlights().contains(flight));
+
+        manager.addFlight(flight);
+
+        assertEquals(0, manager.getFlights().size());
     }
 
     @Test
-    @DisplayName("Testa Cadastro Inválido com Nome e Número de Passageiro Vazios e Email do Passageiro Válido")
-    public void testCadastroInvalido_NomeNumPassageiroVaziosContatoValido() {
-        Passageiro passageiro = new Passageiro("", "", "joão@email.com");
-        assertFalse(passageiro.ehCadastroValido());
+    @DisplayName("Testar Remover Voo")
+    void testRemoveFlight() {
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
+        assertFalse(manager.getFlights().contains(flight));
+
+        manager.addFlight(flight);
+
+        manager.removeFlight(0);
+        assertEquals(0, manager.getFlights().size());
     }
-}
+
+    @Test
+    @DisplayName("Testar Atualizar Voo")
+    void testUpdateFlight() {
+        Flight flight = new Flight("Voo 1", "São Paulo", "Rio de Janeiro", LocalDate.of(2024, 4, 1), 2);
+        assertFalse(manager.getFlights().contains(flight));
+
+        manager.addFlight(flight);
+        flight.setDestination("Nova Iorque");
+        manager.updateFlight(0, flight);
+
+        assertEquals(flight, manager.getFlights().get(0));
+    }
